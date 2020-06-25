@@ -4,9 +4,9 @@ _Authored by the WLCG AuthZ Working Group_
 
 ## Proposal
 
-Client tools that rely on a bearer token for authenticating themselves need a mechanism for receiving the tokens from their environment.  While the browser is a monolithic user agent (and can internally manage tokens), the terminal environment involves a number of independently-developed tools; the environment needs a way to communicate the token to be used to Unix processes.  To the best of our knowledge, there’s no previously defined standard about how a Unix tool should discover a token from its environment.
+Client tools that rely on a bearer token for authenticating themselves need a mechanism for receiving the tokens from their environment.  While the browser is a monolithic user agent (and can internally manage tokens), the terminal environment involves a number of independently-developed tools; the environment needs a way to communicate the token to be used to Unix processes.  To the best of our knowledge, there's no previously defined standard about how a Unix tool should discover a token from its environment.
 
-If a tool needs to authenticate with a token and does not have out-of-band WLCG Bearer Token Discovery knowledge on which token to use, the following steps to discover a token MUST be taken in sequence (where ``$ID`` below is taken as the process’s effective user ID):
+If a tool needs to authenticate with a token and does not have out-of-band WLCG Bearer Token Discovery knowledge on which token to use, the following steps to discover a token MUST be taken in sequence (where ``$ID`` below is taken as the process's effective user ID):
 
 1. If the ``BEARER_TOKEN`` environment variable is set, then the value is taken to be the token contents.
 
@@ -30,7 +30,7 @@ High-level tools that need to simultaneously support bearer tokens for multiple 
 /tmp/bt_u1221-fife-CMS
 ```
 
-The ‘purpose name’ is deliberately left undefined and intended for use by the tool implementer.  These high-level tools SHOULD consider potential filename collisions with other tools when implementing a naming scheme.  When executing lower-level tools, the high-level tool SHOULD set the ``$BEARER_TOKEN_FILE`` to the desired file.  Tools SHOULD NOT inspect multiple tokens to try to determine which one to use based on content. 
+The `purpose name` is deliberately left undefined and intended for use by the tool implementer.  These high-level tools SHOULD consider potential filename collisions with other tools when implementing a naming scheme.  When executing lower-level tools, the high-level tool SHOULD set the ``$BEARER_TOKEN_FILE`` to the desired file.  Tools SHOULD NOT inspect multiple tokens to try to determine which one to use based on content. 
 
 ------------
 
