@@ -12,13 +12,13 @@ If a tool needs to authenticate with a token and does not have out-of-band WLCG 
 
 2. If the ``BEARER_TOKEN_FILE`` environment variable is set, then its value is interpreted as a filename.  The contents of the specified file are taken to be the token contents.
 
-3. If the ``XDG_RUNTIME_DIR`` environment variable is set\*, then take the token from the contents of $XDG_RUNTIME_DIR/bt_u$ID \** (NOTE:  This additional location is intended to provide improved security for shared login environments as $XDG_RUNTIME_DIR is defined to be user-specific as opposed to a system-wide directory.).
+3. If the ``XDG_RUNTIME_DIR`` environment variable is set\*, then take the token from the contents of ``$XDG_RUNTIME_DIR/bt_u$ID``\*\*.
 
 4. Otherwise, take the token from ``/tmp/bt_u$ID``.
 
 If a potential token is found at a step, then the discovery implementation MUST strip all whitespace on the left and right sides of the string (we define whitespace the same way as the C99 ``isspace`` function: space, form-feed (``\f``), newline (``\n``), carriage return (``\r``), horizontal tab (``\t``), and vertical tab (``\v``).  Upon finding a valid token according to section 2.1 of RFC6750, the discovery procedure MUST terminate and return this token.  Upon finding an empty token, the discovery implementation should continue with the next step.  Upon finding an invalid token, the implementation SHOULD stop and return an error.  
 
-Once a valid token, $TOKEN, is discovered, if it is used to authenticate an HTTP request, the tool MUST use it in accordance with RFC6750, for example in the Authorization header as follows:
+Once a valid token, ``$TOKEN``, is discovered, if it is used to authenticate an HTTP request, the tool MUST use it in accordance with RFC6750, for example in the Authorization header as follows:
 
 ```
 Authorization: Bearer $TOKEN
