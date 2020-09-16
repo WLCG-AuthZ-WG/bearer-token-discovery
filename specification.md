@@ -16,6 +16,8 @@ If a tool needs to authenticate with a token and does not have out-of-band WLCG 
 
 4. Otherwise, take the token from ``/tmp/bt_u$ID``.
 
+For steps 3 and 4 the implementation MUST check if the file is owned by user ``$ID``. To preclude race condition vulnerabilities, such checks typically need to be done through ``fstat()`` on the file descriptor used for reading the file. If the file is owned by a different user, its contents MUST be ignored by the algorithm and a corresponding warning SHOULD be printed to the standard error stream.
+
 If a potential token is found at a step, then the discovery implementation MUST strip all whitespace on the left and right sides of the string (we define whitespace the same way as the C99 ``isspace`` function: space, form-feed (``\f``), newline (``\n``), carriage return (``\r``), horizontal tab (``\t``), and vertical tab (``\v``)).  Upon finding a valid token according to section 2.1 of RFC6750, the discovery procedure MUST terminate and return this token.  Upon finding an empty token, the discovery implementation should continue with the next step.  Upon finding an invalid token, the implementation SHOULD stop and return an error.  
 
 Once a valid token, ``$TOKEN``, is discovered, if it is used to authenticate an HTTP request, the tool MUST use it in accordance with RFC6750, for example in the Authorization header as follows:
