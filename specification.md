@@ -2,8 +2,6 @@
 
 _Authored by the WLCG AuthZ Working Group_
 
-## Proposal
-
 Client tools that rely on a bearer token for authenticating themselves need a mechanism for receiving the tokens from their environment.  While the browser is a monolithic user agent (and can internally manage tokens), the terminal environment involves a number of independently-developed tools; the environment needs a way to communicate the token to be used to Unix processes.  To the best of our knowledge, there's no previously defined standard about how a Unix tool should discover a token from its environment.
 
 If a tool needs to authenticate with a token and does not have out-of-band WLCG Bearer Token Discovery knowledge on which token to use, the following steps to discover a token MUST be taken in sequence (where ``$ID`` below is taken as the process's effective user ID):
